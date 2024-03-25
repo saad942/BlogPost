@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    background-color: black;
+    height: 50px;
+    align-items: center;
+    color: azure;
+}
+
+.nav {
+    grid: 10px;
+    margin-right: 100px;
+}
+
+.nav span {
+    margin-left: 20px;
+    font-size: 18px;
+}
+.icn{
+    font-size: 25px;
+    margin-left: 10px;
+}
