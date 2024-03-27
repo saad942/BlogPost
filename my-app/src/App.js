@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Footer from './footer/footer';
 import Nav from './nav/nav';
-import Home from './home/home';
-import Login from './login/login';
+import Controle from './Controle/controle';
+import Login from './login-regestry/login';
+import Regestry from './login-regestry/regesty';
+
 
 function App() {
   return (
@@ -10,8 +12,9 @@ function App() {
       <Router>
         <Nav />
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/Controle" element={<Controle />} />
           <Route path="/" element={<Login />} />
+          <Route path="/regestry" element={<Regestry />} />
         </Routes>
         <Footer />
       </Router>

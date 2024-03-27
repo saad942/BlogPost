@@ -29,10 +29,15 @@ function Login() {
           <input className="login-input" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         </div>
         <div>
+          <label>Email:</label>
+          <input className="login-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        <div>
           <label>Password:</label>
           <input className="login-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
         <button className="login-button" type="submit">Login</button>
+        <p>I have account <a href='/'>click-me</a></p>
       </form>
     </div>
   );
