@@ -32,11 +32,11 @@ const verifyToken = (req, res, next) => {
         next();
     });
 };
-router.get("/products",getProduct);
+router.get("/products",verifyToken,getProduct);
 router.get("/products/:id",  getProductById);
-router.post("/products",  createProduct);
-router.put("/products/:id",  updateProduct);
-router.delete("/products/:id", deleteProduct);
-router.get("/products",verifyToken,searchForProduct)
+router.post("/products", verifyToken, createProduct);
+router.put("/products/:id", verifyToken, updateProduct);
+router.delete("/products/:id",verifyToken, deleteProduct);
+router.get("/products",searchForProduct)
 
 module.exports = router;

@@ -9,11 +9,11 @@ export default function Nav(){
             <strong >Blog App</strong>
             <div></div>
             <div className="nav">
+             <span> Home</span>   
+            <span>Controle my post</span>
+            <span>Lougout</span>
+        
             
-            <span> Home</span>
-            <span> Add blog</span>
-            <span> About</span>
-            <FontAwesomeIcon icon={faUser} className="icn" />
           </div>
         </div>
     )

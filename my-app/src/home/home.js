@@ -8,16 +8,26 @@ function Home() {
     const [description, setDescription] = useState('');
     const [information, setInformation] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
+    const token = localStorage.getItem('token');
 
     useEffect(() => {
-        axios.get(`http://localhost:3002/user/products`)
+        axios.get(`http://localhost:3002/user/products`,
+            {
+                headers: {
+                    'authorization': ` ${token}` // Send token in the Authorization header
+                }
+            })
             .then((response) => {
+
+
                 setInformation(response.data);
             })
             .catch((error) => {
                 console.error(error);
             });
+           
     }, []);
+
 
     const add = async (e) => {
         e.preventDefault();
@@ -26,7 +36,9 @@ function Home() {
                 await axios.put(`http://localhost:3002/user/products/${information[editIndex].id}`, {
                     name: name,
                     description: description
-                });
+                },  {headers: {
+                    'authorization': ` ${token}` // Send token in the Authorization header
+            }});
                 const updatedInformation = [...information];
                 updatedInformation[editIndex] = { id: information[editIndex].id, name: name, description: description };
                 setInformation(updatedInformation);
@@ -39,7 +51,9 @@ function Home() {
                 const response = await axios.post("http://localhost:3002/user/products", {
                     name: name,
                     description: description
-                });
+                },  {headers: {
+                    'authorization': ` ${token}` // Send token in the Authorization header
+            }});
                 console.log('Product added:', response.data);
                 setInformation([...information, response.data]);
                 setname('');
@@ -52,7 +66,11 @@ function Home() {
 
     const deletePost = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:3002/user/products/${id}`);
+            const response = await axios.delete(`http://localhost:3002/user/products/${id}`   ,{
+                headers: {
+                    'authorization': ` ${token}` // Send token in the Authorization header
+                }
+            })
             console.log(response);
             console.log('Product deleted successfully');
             setInformation(information.filter(item => item.id !== id));

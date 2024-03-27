@@ -1,15 +1,28 @@
-import Footer from "./footer/footer";
-import Nav from "./nav/nav";
-import Home from "./home/home";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Footer from './footer/footer';
+import Nav from './nav/nav';
+import Home from './home/home';
+import Login from './login/login';
+
 function App() {
   return (
     <div className="App">
-      <Nav/>
-      <Home/>
-     <Footer/>
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Login />} />
+        </Routes>
+        <Footer />
+      </Router>
     </div>
   );
 }
+
+export default App; 
+
+
+
 // import React, { useState } from "react";
 // import './aaa.css';
 
@@ -76,7 +89,7 @@ function App() {
 //   );
 // }
 
-export default App;
+// export default App;
 
 
 
