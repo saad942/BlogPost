@@ -4,24 +4,27 @@ import './loginStyles.css'; // Import CSS file
 
 function Login() {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3002/user/login', { name:username, password:password });
-      const token = response.data.token;
-      localStorage.setItem('token', token);
-      window.location.href = '/home';
+      const response = await axios.post('http://localhost:3002/user/register', { name: username, email: email, password: password });
+      if (response.data.status === 'success') {
+        window.location.href = '/'; // Redirect to homepage on successful registration
+      } else {
+        setError('Something went wrong'); // Set error message if registration was unsuccessful
+      }
     } catch (error) {
-      setError('Invalid username or password');
+      setError('An error occurred'); // Set error message if an unexpected error occurred
     }
   };
 
   return (
     <div className="login-container">
-      <h2 className="login-heading">Login</h2>
+      <h2 className="login-heading">Register</h2>
       {error && <div className="error-message">{error}</div>}
       <form className="login-form" onSubmit={handleSubmit}>
         <div>
@@ -30,15 +33,15 @@ function Login() {
         </div>
         <div>
           <label>Email:</label>
-          <input className="login-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input className="login-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div>
           <label>Password:</label>
           <input className="login-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <button className="login-button" type="submit">Login</button>
-        <p>I have account <a href='/'>click-me</a></p>
+        <button className="login-button" type="submit">Create Account</button>
       </form>
+      <p>Already have an account? <a href='/'>Login here</a></p>
     </div>
   );
 }

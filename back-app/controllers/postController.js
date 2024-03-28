@@ -25,20 +25,17 @@ const searchForProduct = async (req, res) => {
 
 
 const getProductById = async (req, res) => {
-    try {
-        const id = req.params.id;
+    const userId = req.user.userId; // Extract the user ID from the JWT token
 
-        const product = await Product.find({id:id});
-        if (product) {
-            res.send(product);
-        } else {
-            res.status(404).send('Product not found');
-        }
+    try {
+        const products = await Product.find({ user: userId });
+        res.json(products);
     } catch (error) {
-        console.error('Error retrieving product:', error);
-        res.status(500).send('Error retrieving product');
+        console.error('Error fetching posts:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 };
+
 
 
 const createProduct = async (req, res) => {

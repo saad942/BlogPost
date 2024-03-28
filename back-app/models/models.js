@@ -3,7 +3,8 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const productSchema = new mongoose.Schema({
     name: { type: String, required: true }, // Name is required
-    description: { type: String }, // Description is optional
+    description: { type: String }, 
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Foreign key referencing User model
     createdAt: { type: Date, default: Date.now }
 });
 

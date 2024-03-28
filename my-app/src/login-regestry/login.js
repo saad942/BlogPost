@@ -10,7 +10,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3002/user/login', { name:username, password:password });
+      const response = await axios.post('http://localhost:3002/user/login', { name: username,  password: password });
       const token = response.data.token;
       localStorage.setItem('token', token);
       window.location.href = '/home';
