@@ -4,6 +4,7 @@ import Nav from './nav/nav';
 import Controle from './Controle/controle';
 import Login from './login-regestry/login';
 import Regestry from './login-regestry/regesty';
+import Home from './home/home';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/Controle" element={<Controle />} />
           <Route path="/" element={<Login />} />
           <Route path="/regestry" element={<Regestry />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
         <Footer />
       </Router>

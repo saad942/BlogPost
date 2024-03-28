@@ -1,0 +1,49 @@
+
+.professional-posts-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10%;
+    margin-left: 10px;
+}
+
+.postt {
+    margin-left: 20px;
+    width: calc(33.33% - 20px); /* Adjust width as needed */
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.postt:hover {
+    transform: translateY(-5px);
+}
+
+.post-header {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+.post-title {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.post-date {
+    font-size: 12px;
+    color: #777;
+}
+
+.post-description {
+    padding: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+
+

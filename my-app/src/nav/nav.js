@@ -16,7 +16,7 @@ export default function Nav(){
             <strong >Blog App</strong>
             <div></div>
             <div className="nav">
-             <span> Post</span>   
+             <span onClick={()=>navigate('/home')}> Post</span>   
              <span onClick={()=>navigate('/Controle')}>Controle my post</span>
             {/* <span onClick={lougout}>Logout </span> */}
             {!token ? (
