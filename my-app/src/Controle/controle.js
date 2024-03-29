@@ -9,6 +9,7 @@ function Home() {
     const [information, setInformation] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
     const token = localStorage.getItem('token');
+    const [added, setAdded] = useState(0);
 
     useEffect(() => {
         axios.get(`http://localhost:3002/user/products`,
@@ -26,7 +27,7 @@ function Home() {
                 console.error(error);
             });
            
-    }, []);
+    }, [added]);
 
 
     const add = async (e) => {
@@ -56,6 +57,7 @@ function Home() {
             }});
                 console.log('Product added:', response.data);
                 setInformation([...information, response.data]);
+                setAdded(1);
                 setname('');
                 setDescription('');
             } catch (error) {
