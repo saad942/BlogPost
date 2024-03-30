@@ -41,7 +41,7 @@ const { verifyToken, Login, CreateUser } = require('../controllers/UserControlle
 //     });
 // };
 
-router.get("/products", verifyToken, getProduct);
+router.get("/products", getProduct);
 router.get("/products/:id", verifyToken, getProductById);
 router.post("/products", verifyToken, createProduct);
 router.put("/products/:id", verifyToken, updateProduct);

@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const Login = async (req, res) => {
-    const { name, password } = req.body;
+    const { name, password ,user_id} = req.body;
     
     try {
         // Find user in database
@@ -12,10 +12,10 @@ const Login = async (req, res) => {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
         
-      
+        const Id = await User.findById(user_id);
 
         // Generate JWT token
-        const token = jwt.sign({ username: user.name, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ username: user.name, role: user.role,user_id: Id  }, process.env.JWT_SECRET, { expiresIn: '1h' });
         
         // Send token as response
         res.json({ token });

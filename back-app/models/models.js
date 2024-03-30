@@ -1,15 +1,15 @@
+// ProductModels.js
 const mongoose = require('mongoose');
-const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const productSchema = new mongoose.Schema({
     name: { type: String, required: true }, // Name is required
     description: { type: String }, 
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Foreign key referencing User model
+    user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, // Foreign key referencing User model
     createdAt: { type: Date, default: Date.now }
 });
 
-productSchema.plugin(AutoIncrement, { inc_field: 'id' });
+// No need to apply plugin for auto-incrementing id in this schema
 
-const Product = mongoose.model('Product', productSchema); // Change model name to "Product"
+const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;

@@ -1,4 +1,5 @@
 const Product = require('../models/models');
+const User = require('../models/UserModels')
 const fs=require('fs');
 const products = require("../post.json");
 
@@ -37,23 +38,32 @@ const getProductById = async (req, res) => {
 };
 
 
-
 const createProduct = async (req, res) => {
     try {
-        const { name, description } = req.body; // Destructure "name" and "description" from request body
+        const { name, description, user_id } = req.body;
 
-        // Validate if "name" is provided
         if (!name) {
             return res.status(400).json({ error: 'Name is required' });
+        }
+        if (!user_id) {
+            return res.status(400).json({ error: 'User ID is required' });
+        }
+
+        // Find the user by user_id
+        const user = await User.findById(user_id);
+
+        // Check if the user exists
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
         }
 
         // Create a new product
         const product = new Product({
             name: name,
-            description: description
+            description: description,
+            user_id: user_id 
         });
 
-        // Save the product to the database
         await product.save();
 
         res.status(201).json({ status: 'success', product: product });
@@ -62,6 +72,9 @@ const createProduct = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+module.exports = { createProduct };
+
 
 const updateProduct = async (req, res) => {
     try {

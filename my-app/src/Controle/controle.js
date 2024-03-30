@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import './images.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
+import jwt_decode from 'jwt-decode';
+
 
 function Home() {
     const [name, setname] = useState('');
@@ -9,6 +11,8 @@ function Home() {
     const [information, setInformation] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
     const token = localStorage.getItem('token');
+    const decode = jwt_decode(token);
+    const UserId=decode.user_id
     const [added, setAdded] = useState(0);
 
     useEffect(() => {
@@ -51,7 +55,8 @@ function Home() {
             try {
                 const response = await axios.post("http://localhost:3002/user/products", {
                     name: name,
-                    description: description
+                    description: description,
+                    user_id: UserId 
                 },  {headers: {
                     'authorization': ` ${token}` // Send token in the Authorization header
             }});
