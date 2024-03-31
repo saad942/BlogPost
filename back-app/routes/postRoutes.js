@@ -42,7 +42,7 @@ const { verifyToken, Login, CreateUser } = require('../controllers/UserControlle
 // };
 
 router.get("/products", getProduct);
-router.get("/products/:id", verifyToken, getProductById);
+router.get("/products/:userId", verifyToken, getProductById);
 router.post("/products", verifyToken, createProduct);
 router.put("/products/:id", verifyToken, updateProduct);
 router.delete("/products/:id", verifyToken, deleteProduct);

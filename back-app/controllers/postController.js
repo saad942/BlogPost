@@ -1,7 +1,7 @@
 const Product = require('../models/models');
-const User = require('../models/UserModels')
 const fs=require('fs');
 const products = require("../post.json");
+const User = require('../models/UserModels')
 
 
 function saveData(){
@@ -26,42 +26,30 @@ const searchForProduct = async (req, res) => {
 
 
 const getProductById = async (req, res) => {
-    const userId = req.user.userId; // Extract the user ID from the JWT token
+    const userId = req.params.userId; // Extract the user ID from the JWT token
 
     try {
-        const products = await Product.find({ user: userId });
+        const products = await Product.find({ user_id: userId });
         res.json(products);
     } catch (error) {
         console.error('Error fetching posts:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 };
-
-
 const createProduct = async (req, res) => {
     try {
-        const { name, description, user_id } = req.body;
+        const { name, description,user_id } = req.body;
 
         if (!name) {
             return res.status(400).json({ error: 'Name is required' });
         }
-        if (!user_id) {
-            return res.status(400).json({ error: 'User ID is required' });
-        }
 
-        // Find the user by user_id
-        const user = await User.findById(user_id);
+        // Assuming the user's ID is available in req.user.id
 
-        // Check if the user exists
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-        // Create a new product
         const product = new Product({
             name: name,
             description: description,
-            user_id: user_id 
+            user_id: user_id // Associate the product with the user by including user_id
         });
 
         await product.save();
@@ -73,7 +61,7 @@ const createProduct = async (req, res) => {
     }
 };
 
-module.exports = { createProduct };
+
 
 
 const updateProduct = async (req, res) => {

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import './images.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
-import jwt_decode from 'jwt-decode';
-
 
 function Home() {
     const [name, setname] = useState('');
@@ -11,12 +9,11 @@ function Home() {
     const [information, setInformation] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
     const token = localStorage.getItem('token');
-    const decode = jwt_decode(token);
-    const UserId=decode.user_id
+    const user =JSON.parse(localStorage.getItem('user'));
     const [added, setAdded] = useState(0);
 
     useEffect(() => {
-        axios.get(`http://localhost:3002/user/products`,
+        axios.get(`http://localhost:3002/user/products/${user._id}`,
             {
                 headers: {
                     'authorization': ` ${token}` // Send token in the Authorization header
@@ -40,7 +37,8 @@ function Home() {
             try {
                 await axios.put(`http://localhost:3002/user/products/${information[editIndex].id}`, {
                     name: name,
-                    description: description
+                    description: description,
+                    
                 },  {headers: {
                     'authorization': ` ${token}` // Send token in the Authorization header
             }});
@@ -53,18 +51,19 @@ function Home() {
             }
         } else {
             try {
+
                 const response = await axios.post("http://localhost:3002/user/products", {
                     name: name,
                     description: description,
-                    user_id: UserId 
+                    user_id:user._id
                 },  {headers: {
                     'authorization': ` ${token}` // Send token in the Authorization header
             }});
                 console.log('Product added:', response.data);
                 setInformation([...information, response.data]);
-                setAdded(1);
                 setname('');
                 setDescription('');
+                setAdded(added+1);
             } catch (error) {
                 console.error('Error adding product:', error);
             }

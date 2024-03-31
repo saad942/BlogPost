@@ -12,7 +12,9 @@ function Login() {
     try {
       const response = await axios.post('http://localhost:3002/user/login', { name: username,  password: password });
       const token = response.data.token;
+      const userInfo=response.data.userInfo;
       localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(userInfo)); // Store user info as JSON string
       window.location.href = '/home';
     } catch (error) {
       setError('Invalid username or password');
