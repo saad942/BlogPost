@@ -4,7 +4,8 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const productSchema = new mongoose.Schema({
     name: { type: String, required: true }, // Name is required
     description: { type: String }, 
-    user_id: { type: Number }, // Foreign key referencing User model
+    user_id: { type: Number }, // Reference to User model
+    image: { type: String }, // Store path or URL to the image
     createdAt: { type: Date, default: Date.now }
 });
 

@@ -1,35 +1,32 @@
+
 import React, { useState, useEffect } from "react";
 import './images.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 
 function Home() {
-    const [name, setname] = useState('');
+    const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [information, setInformation] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
     const token = localStorage.getItem('token');
-    const user =JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('user'));
     const [added, setAdded] = useState(0);
+    const [image, setImage] = useState(null); // Set initial value of image to null
 
     useEffect(() => {
-        axios.get(`http://localhost:3002/user/products/${user._id}`,
-            {
-                headers: {
-                    'authorization': ` ${token}` // Send token in the Authorization header
-                }
-            })
-            .then((response) => {
-
-
-                setInformation(response.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-           
+        axios.get(`http://localhost:3002/user/products/${user._id}`, {
+            headers: {
+                'Authorization': ` ${token}` // Fix Authorization header
+            }
+        })
+        .then((response) => {
+            setInformation(response.data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }, [added]);
-
 
     const add = async (e) => {
         e.preventDefault();
@@ -38,10 +35,11 @@ function Home() {
                 await axios.put(`http://localhost:3002/user/products/${information[editIndex].id}`, {
                     name: name,
                     description: description,
-                    
-                },  {headers: {
-                    'authorization': ` ${token}` // Send token in the Authorization header
-            }});
+                }, {
+                    headers: {
+                        'Authorization': ` ${token}`
+                    }
+                });
                 const updatedInformation = [...information];
                 updatedInformation[editIndex] = { id: information[editIndex].id, name: name, description: description };
                 setInformation(updatedInformation);
@@ -51,19 +49,23 @@ function Home() {
             }
         } else {
             try {
+                const formData = new FormData();
+                formData.append('name', name);
+                formData.append('description', description);
+                formData.append('user_id', user._id);
+                formData.append('image', image); 
 
-                const response = await axios.post("http://localhost:3002/user/products", {
-                    name: name,
-                    description: description,
-                    user_id:user._id
-                },  {headers: {
-                    'authorization': ` ${token}` // Send token in the Authorization header
-            }});
+                const response = await axios.post("http://localhost:3002/user/products", formData, {
+                    headers: {
+                        'Authorization': `${token}`,
+                    }
+                });
                 console.log('Product added:', response.data);
                 setInformation([...information, response.data]);
-                setname('');
+                setName('');
                 setDescription('');
-                setAdded(added+1);
+                setImage(null);
+                setAdded(added + 1);
             } catch (error) {
                 console.error('Error adding product:', error);
             }
@@ -72,9 +74,9 @@ function Home() {
 
     const deletePost = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:3002/user/products/${id}`   ,{
+            const response = await axios.delete(`http://localhost:3002/user/products/${id}`, {
                 headers: {
-                    'authorization': ` ${token}` // Send token in the Authorization header
+                    'Authorization': ` ${token}`
                 }
             })
             console.log(response);
@@ -88,7 +90,7 @@ function Home() {
     const editPost = (id) => {
         const index = information.findIndex(product => product.id === id);
         if (index !== -1) {
-            setname(information[index].name);
+            setName(information[index].name);
             setDescription(information[index].description);
             setEditIndex(index);
         } else {
@@ -100,13 +102,15 @@ function Home() {
         <div className="home-container">
             <img src="./images/pexels-photo-3631711.jpeg" className="img" alt="Example" />
             <div className="form-container">
-                <input type="text" value={name} onChange={(e) => setname(e.target.value)} placeholder="name" />
+                <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
                 <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
                 <button onClick={add}>{editIndex !== null ? 'Update' : 'Add'}</button>
                 {information.map((info, index) => (
                     <div className="post" key={index}>
                         <h2>{info.name}</h2>
                         <p>{info.description}</p>
+                        <img src={`data:image/png;base64,${info.image}`} alt={info.name} style={{ maxWidth: '200px' }} />
                         <button onClick={() => deletePost(info.id)}>Delete</button>
                         <button onClick={() => editPost(info.id)}>Update</button>
                     </div>
@@ -116,9 +120,4 @@ function Home() {
     );
 }
 
-
-
-
-
 export default Home;
-

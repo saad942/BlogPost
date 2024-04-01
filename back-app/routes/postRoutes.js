@@ -40,10 +40,21 @@ const { verifyToken, Login, CreateUser } = require('../controllers/UserControlle
 //         next();
 //     });
 // };
+const multer = require('multer');
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + '-' + file.originalname);
+  },
+});
+const upload = multer({ storage });
 router.get("/products", getProduct);
 router.get("/products/:userId", verifyToken, getProductById);
-router.post("/products", verifyToken, createProduct);
+router.post("/products", verifyToken, upload.single('image'),createProduct);
 router.put("/products/:id", verifyToken, updateProduct);
 router.delete("/products/:id", verifyToken, deleteProduct);
 router.get("/products/search", verifyToken, searchForProduct); // Example of a search route

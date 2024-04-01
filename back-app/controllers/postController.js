@@ -36,31 +36,20 @@ const getProductById = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+
+
 const createProduct = async (req, res) => {
     try {
-        const { name, description,user_id } = req.body;
-
-        if (!name) {
-            return res.status(400).json({ error: 'Name is required' });
-        }
-
-        // Assuming the user's ID is available in req.user.id
-
-        const product = new Product({
-            name: name,
-            description: description,
-            user_id: user_id // Associate the product with the user by including user_id
-        });
-
+        const { name, description, user_id } = req.body;
+        const image = req.file.filename;
+        const product = new Product({ name, description, user_id, image });
         await product.save();
-
-        res.status(201).json({ status: 'success', product: product });
-    } catch (error) {
-        console.error('Error creating product:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        res.json(product);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     }
 };
-
 
 
 
@@ -94,6 +83,8 @@ const deleteProduct = async (req, res) => {
         res.status(500).send('Error deleting product');
     }
 };
+
+
 
 const getProduct=async(req,res)=>{
     const product= await Product.find()
