@@ -56,8 +56,8 @@ const createProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
     try {
         const id = req.params.id;
-        const { name,  description } = req.body;
-        const updatedProduct = await Product.findOneAndUpdate({id:id}, {$set:{ name,  description }}, { new: true });
+        const { name,  description ,image } = req.body;
+        const updatedProduct = await Product.findOneAndUpdate({id:id}, {$set:{ name,  description ,image}}, { new: true });
         if (updatedProduct) {
             res.send(updatedProduct);
         } else {

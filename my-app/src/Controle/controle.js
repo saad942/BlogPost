@@ -12,7 +12,7 @@ function Home() {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user'));
     const [added, setAdded] = useState(0);
-    const [image, setImage] = useState(null); // Set initial value of image to null
+    const [image, setImage] = useState(); // Set initial value of image to null
 
     useEffect(() => {
         axios.get(`http://localhost:3002/user/products/${user._id}`, {
@@ -20,12 +20,12 @@ function Home() {
                 'Authorization': ` ${token}` // Fix Authorization header
             }
         })
-        .then((response) => {
-            setInformation(response.data);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+            .then((response) => {
+                setInformation(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }, [added]);
 
     const add = async (e) => {
@@ -33,6 +33,7 @@ function Home() {
         if (editIndex !== null) {
             try {
                 await axios.put(`http://localhost:3002/user/products/${information[editIndex].id}`, {
+                    image:image,
                     name: name,
                     description: description,
                 }, {
@@ -41,7 +42,7 @@ function Home() {
                     }
                 });
                 const updatedInformation = [...information];
-                updatedInformation[editIndex] = { id: information[editIndex].id, name: name, description: description };
+                updatedInformation[editIndex] = { id: information[editIndex].id,image:image, name: name, description: description };
                 setInformation(updatedInformation);
                 setEditIndex(null);
             } catch (error) {
@@ -53,7 +54,7 @@ function Home() {
                 formData.append('name', name);
                 formData.append('description', description);
                 formData.append('user_id', user._id);
-                formData.append('image', image); 
+                formData.append('image', image);
 
                 const response = await axios.post("http://localhost:3002/user/products", formData, {
                     headers: {
@@ -91,6 +92,7 @@ function Home() {
         const index = information.findIndex(product => product.id === id);
         if (index !== -1) {
             setName(information[index].name);
+            setImage(information[index].image);
             setDescription(information[index].description);
             setEditIndex(index);
         } else {
@@ -102,19 +104,20 @@ function Home() {
         <div className="home-container">
             <img src="./images/pexels-photo-3631711.jpeg" className="img" alt="Example" />
             <div className="form-container">
-                <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+                <input type="file"   onChange={(e) => setImage(e.target.files[0])} />
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
                 <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
                 <button onClick={add}>{editIndex !== null ? 'Update' : 'Add'}</button>
                 {information.map((info, index) => (
                     <div className="post" key={index}>
                         <h2>{info.name}</h2>
+                        <img src={`http://localhost:3002/${info.image}`} alt={info.name} style={{ maxWidth: '200px' }} />
                         <p>{info.description}</p>
-                        <img src={`data:image/png;base64,${info.image}`} alt={info.name} style={{ maxWidth: '200px' }} />
                         <button onClick={() => deletePost(info.id)}>Delete</button>
                         <button onClick={() => editPost(info.id)}>Update</button>
                     </div>
                 ))}
+
             </div>
         </div>
     );

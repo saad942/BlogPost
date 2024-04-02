@@ -11,6 +11,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/post";
 // Middleware
 app.use(express.json());
 app.use(cors());
+app.use(express.static('uploads')); // Replace 'public' with the directory containing your images
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI)
