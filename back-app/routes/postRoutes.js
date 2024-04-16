@@ -41,6 +41,7 @@ const { verifyToken, Login, CreateUser } = require('../controllers/UserControlle
 //     });
 // };
 const multer = require('multer');
+const Product = require('../models/models');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -62,5 +63,26 @@ router.get("/products/search", verifyToken, searchForProduct); // Example of a s
 // User Routes
 router.post("/register", CreateUser);
 router.post("/login", Login);
+
+
+//
+router.post('/:postId/like', async (req, res) => {
+  try {
+      // Find the post by ID
+      const post = await Product.findById(req.params.postId);
+
+      // Increment the likes count
+      post.likes++;
+
+      // Save the updated post
+      await post.save();
+
+      // Respond with the updated likes count
+      res.json({ likes: post.likes });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server Error' });
+  }
+});
 
 module.exports = router;

@@ -6,6 +6,10 @@ const productSchema = new mongoose.Schema({
     description: { type: String }, 
     user_id: { type: Number }, // Reference to User model
     image: { type: String }, // Store path or URL to the image
+    likes: {
+        type: Number,
+        default: 0
+      },
     createdAt: { type: Date, default: Date.now }
 });
 

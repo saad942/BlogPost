@@ -1,4 +1,4 @@
-.professional-posts-container {
+/* .professional-posts-container {
     display: flex;
     flex-wrap: wrap;
     margin-top: 10%;
@@ -8,7 +8,7 @@
 
 .postt {
     margin-left: 20px;
-    width: calc(33.33% - 20px); /* Adjust width as needed */
+    width: calc(33.33% - 20px); 
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -16,7 +16,7 @@
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    position: relative; /* Add relative positioning */
+    position: relative; 
 }
 
 .postt:hover {
@@ -55,15 +55,15 @@
 }
 
 .post-actions {
-    position: absolute; /* Position actions at the bottom */
+    position: absolute; 
     bottom: 0;
     left: 0;
     right: 0;
     padding: 10px;
-    background-color: #f5f5f5; /* Match background color of post header */
+    background-color: #f5f5f5; 
     display: flex;
     justify-content: space-around;
-    border-top: 1px solid #ddd; /* Add border between description and actions */
+    border-top: 1px solid #ddd; 
 }
 
 .action {
@@ -74,4 +74,110 @@
 
 .action svg {
     margin-right: 5px;
+}
+
+.action.liked {
+    color: blue;
+  }
+   */
+
+/* Search container styling */
+.search-icon {
+    /* Keep the existing styles */
+    font-size: 18px; /* Increase icon size */
+}
+
+/* Search input styling */
+.search-input {
+    /* Keep the existing styles */
+    border-radius: 5px; /* Add border radius */
+}
+
+/* Search input focus styling */
+.search-input:focus {
+    /* Keep the existing styles */
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+
+.professional-posts-container {
+    display: flex;
+    flex-direction: column; /* Change to column layout */
+    align-items: center; /* Center posts horizontally */
+    margin-top: 20px;
+}
+
+/* Individual post styling */
+.postt {
+    width: 500px;
+    margin-bottom: 20px; /* Add margin between posts */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.postt:hover {
+    transform: translateY(-5px);
+}
+
+/* Header styling */
+.post-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.post-date {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Title styling */
+.post-title {
+    margin: 10px 0;
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.postt img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Description styling */
+.post-description {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Actions styling */
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    color: #555;
+    cursor: pointer;
+}
+
+.action svg {
+    margin-right: 5px;
+}
+
+/* Like action styling */
+.action.liked {
+    color: blue;
 }
