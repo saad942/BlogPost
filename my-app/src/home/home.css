@@ -181,3 +181,44 @@
 .action.liked {
     color: blue;
 }
+.custom-select {
+    position: relative;
+    display: inline-block;
+    margin-right: 550px;
+  }
+  
+  .select-wrapper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #757070;
+    border-radius: 4px;
+    padding: 5px;
+  }
+  
+  .custom-select label {
+    margin-right: 5px;
+  }
+  
+  .custom-select select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .custom-select i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  .custom-select select:focus {
+    border-color: #aaa;
+  }
+  

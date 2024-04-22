@@ -24,3 +24,16 @@
     font-size: 25px;
     margin-left: 10px;
 }
+.search-container {
+    position: relative;
+  }
+  
+  .search-input {
+    padding-right: 30px; /* Adjust this value according to the icon size */
+  }
+  
+  .search-icon {
+margin-left: 10px; 
+margin-top: 5px;   
+  }
+  

@@ -49,7 +49,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './home.css';
-import { faBookmark , faThumbsUp ,faSearch} from "@fortawesome/free-solid-svg-icons";
+import { faBookmark, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Home() {
@@ -97,19 +97,28 @@ function Home() {
 
     return (
         <div className="professional-posts-container">
-            <input type="text"  placeholder="Search posts..." />
-        <FontAwesomeIcon icon={faSearch} className="search-icon" />
+            {/* <input type="text"  placeholder="Search posts..." />
+        <FontAwesomeIcon icon={faSearch} className="search-icon" /> */}
+            <div className="custom-select">
+                <label htmlFor="category">Category: </label>
+                <select id="category" >
+                    <option value="">Select</option>
+                    <option value="economique">Économique</option>
+                    <option value="news">News</option>
+                    <option value="amitie">Sport</option>
+                </select>
+            </div><br/>
             {information.map((post, index) => (
                 <div className="postt" key={post._id}>
                     <div className="post-header">
                         <p className="post-date">{new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                     </div>
                     <img src={`http://localhost:3002/${post.image}`} alt={post.name} style={{ maxWidth: '250px' }} />
-                    <h3 style={{textAlign:'center'}}className="post-title">{post.name}</h3>
+                    <h3 style={{ textAlign: 'center' }} className="post-title">{post.name}</h3>
                     <p className="post-description">{post.description}</p>
                     <div className="post-actions">
                         <span className={`action${isPostLiked(post._id) ? ' liked' : ''}`} onClick={() => handleLike(post._id)}><FontAwesomeIcon icon={faThumbsUp} /> Like{post.likes}</span>
-                        <span className="action"><FontAwesomeIcon icon={faBookmark } /> Share</span>
+                        <span className="action"><FontAwesomeIcon icon={faBookmark} /> Enregister</span>
                     </div>
                 </div>
             ))}

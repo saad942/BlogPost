@@ -5,6 +5,7 @@ import Controle from './Controle/controle';
 import Login from './login-regestry/login';
 import Regestry from './login-regestry/regesty';
 import Home from './home/home';
+import Profil from './profil/profil';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/regestry" element={<Regestry />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profil />} />
         </Routes>
         <Footer />
       </Router>
