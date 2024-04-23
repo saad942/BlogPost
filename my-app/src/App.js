@@ -7,12 +7,13 @@ import Regestry from './login-regestry/regesty';
 import Home from './home/home';
 import Profil from './profil/profil';
 
-
 function App() {
   return (
     <div className="App">
       <Router>
+        {/* Nav component rendered within the Router */}
         <Nav />
+        
         <Routes>
           <Route path="/Controle" element={<Controle />} />
           <Route path="/" element={<Login />} />
@@ -26,7 +27,9 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
+
+
 
 
 
