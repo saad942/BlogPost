@@ -51,7 +51,6 @@ import axios from "axios";
 import './home.css';
 import { faBookmark, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Model from './model'
 
 function Home() {
     const [information, setInformation] = useState([]);
@@ -101,7 +100,6 @@ function Home() {
             {/* <input type="text"  placeholder="Search posts..." />
         <FontAwesomeIcon icon={faSearch} className="search-icon" /> */}
             <div className="custom-select">
-                <Model/>
                 <label htmlFor="category">Category: </label>
                 <select id="category" >
                     <option value="">Select</option>
