@@ -6,6 +6,7 @@ import axios from "axios";
 
 function Home() {
     const [name, setName] = useState('');
+    const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     const [information, setInformation] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
@@ -36,13 +37,14 @@ function Home() {
                     image:image,
                     name: name,
                     description: description,
+                    category: category,
                 }, {
                     headers: {
                         'Authorization': ` ${token}`
                     }
                 });
                 const updatedInformation = [...information];
-                updatedInformation[editIndex] = { id: information[editIndex].id,image:image, name: name, description: description };
+                updatedInformation[editIndex] = { id: information[editIndex].id,image:image, name: name, description: description, category: category };
                 setInformation(updatedInformation);
                 setEditIndex(null);
             } catch (error) {
@@ -55,6 +57,7 @@ function Home() {
                 formData.append('description', description);
                 formData.append('user_id', user._id);
                 formData.append('image', image);
+                formData.append('category', category);
 
                 const response = await axios.post("http://localhost:3002/user/products", formData, {
                     headers: {
@@ -66,6 +69,7 @@ function Home() {
                 setName('');
                 setDescription('');
                 setImage(null);
+                setCategory('');
                 setAdded(added + 1);
             } catch (error) {
                 console.error('Error adding product:', error);
@@ -94,6 +98,7 @@ function Home() {
             setName(information[index].name);
             setImage(information[index].image);
             setDescription(information[index].description);
+            setCategory(information[index].category);
             setEditIndex(index);
         } else {
             console.error(`Product with ID ${id} not found`);
@@ -104,6 +109,12 @@ function Home() {
         <div className="home-container">
             <img src="./images/pexels-photo-3631711.jpeg" className="img" alt="Example" />
             <div className="form-container">
+            <select onChange={(e) => setCategory(e.target.value)} value={category}>
+                <option>category</option>
+                <option value="News">News</option>
+                <option value="Économique">Économique</option>
+                <option value="Sport">Sport</option>
+            </select>
                 <input type="file"   onChange={(e) => setImage(e.target.files[0])} />
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
                 <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
@@ -111,6 +122,7 @@ function Home() {
                 {information.map((info, index) => (
                     <div className="post" key={index}>
                         <h2>{info.name}</h2>
+                        <h4>{info.category}</h4>
                         <img src={`http://localhost:3002/${info.image}`} alt={info.name} style={{ maxWidth: '200px' }} />
                         <p>{info.description}</p>
                         <button onClick={() => deletePost(info.id)}>Delete</button>

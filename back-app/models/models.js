@@ -10,6 +10,7 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0
       },
+      category:{ type: String },
     createdAt: { type: Date, default: Date.now }
 });
 

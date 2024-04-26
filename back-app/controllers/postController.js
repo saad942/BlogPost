@@ -10,9 +10,8 @@ function saveData(){
 }
 const searchForProduct = async (req, res) => {
     try {
-        const min = req.query.minPrice;
-        const max = req.query.maxPrice;
-        const products = await Product.find({ price: { $gte: min, $lte: max } });
+        const cat = req.query.cat;
+        const products = await Product.find({ category: cat });
         if (products.length > 0) {
             res.send(products);
         } else {
@@ -41,9 +40,9 @@ const getProductById = async (req, res) => {
 
 const createProduct = async (req, res) => {
     try {
-        const { name, description, user_id } = req.body;
+        const { name, description, user_id ,category} = req.body;
         const image = req.file.filename;
-        const product = new Product({ name, description, user_id, image });
+        const product = new Product({ name, description, user_id, image,category });
         await product.save();
         res.json(product);
     } catch (err) {
@@ -56,8 +55,8 @@ const createProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
     try {
         const id = req.params.id;
-        const { name,  description ,image } = req.body;
-        const updatedProduct = await Product.findOneAndUpdate({id:id}, {$set:{ name,  description ,image}}, { new: true });
+        const { name,  description ,image,category } = req.body;
+        const updatedProduct = await Product.findOneAndUpdate({id:id}, {$set:{ name,  description ,image,category}}, { new: true });
         if (updatedProduct) {
             res.send(updatedProduct);
         } else {
