@@ -9,7 +9,7 @@ const {
   getProduct 
 } = require("../controllers/postController");
 
-const { verifyToken, Login, CreateUser } = require('../controllers/UserController');
+const { verifyToken, Login, CreateUser ,getUserById} = require('../controllers/UserController');
 // const dataUser = require("../dataUser.json");
 
 // // Login route
@@ -54,15 +54,16 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 router.get("/products", getProduct);
+router.get("/products/search",  searchForProduct); 
 router.get("/products/:userId", verifyToken, getProductById);
 router.post("/products", verifyToken, upload.single('image'),createProduct);
 router.put("/products/:id", verifyToken, updateProduct);
 router.delete("/products/:id", verifyToken, deleteProduct);
-router.get("/products/search", verifyToken, searchForProduct); // Example of a search route
 
 // User Routes
 router.post("/register", CreateUser);
 router.post("/login", Login);
+router.get('/user',getUserById);
 
 
 //

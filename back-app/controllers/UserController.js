@@ -55,5 +55,17 @@ const CreateUser = async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+const getUserById = async (req, res) => {
+    const userId = req.params.userId; 
 
-module.exports = { Login, verifyToken, CreateUser };
+    try {
+        const products = await User.find({ _id: userId }); 
+        res.json(products);
+    } catch (error) {
+        console.error('Error fetching user:', error); 
+        res.status(500).json({ error: 'Internal server error' }); 
+    }
+};
+
+
+module.exports = { Login, verifyToken, CreateUser ,getUserById};
