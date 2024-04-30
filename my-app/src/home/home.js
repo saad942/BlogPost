@@ -134,7 +134,7 @@ function Home() {
                         <p className="post-date">{new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                     </div>
                     <img src={`http://localhost:3002/${post.image}`} alt={post.name} style={{ maxWidth: '250px' }} />
-                    <h3 style={{ textAlign: 'center' }} className="post-title">{post.name}</h3>
+                    <h3 style={{ textAlign: 'center' }} className="post-title">Name:{post.name}</h3>
                     <p className="post-description">{post.description}</p>
                     <div className="post-actions">
                         <span className={`action${isPostLiked(post._id) ? ' liked' : ''}`} onClick={() => handleLike(post._id)}>
