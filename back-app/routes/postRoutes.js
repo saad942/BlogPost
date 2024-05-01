@@ -63,7 +63,7 @@ router.delete("/products/:id", verifyToken, deleteProduct);
 // User Routes
 router.post("/register", CreateUser);
 router.post("/login", Login);
-router.get('/user',getUserById);
+router.get('/user/:userId',getUserById);
 
 
 //

@@ -37,7 +37,7 @@
 }
 
 .sidebar ul li a:hover {
-    background-color:white;
+    background-color: white;
     color: black;
     border-radius: 5px;
 }
@@ -57,11 +57,34 @@
 
 /* Content styles */
 .content {
-    flex: 1;
     padding: 20px;
+    background-color: #f9f9f9;
+    flex: 1;
 }
 
 .content h1 {
-    font-size: 24px;
+    font-size: 32px;
     color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.user-profile {
+    background-color: #fff;
+    border: 2px solid #007bff;
+    padding: 30px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile h3 {
+    font-size: 36px; /* Increased font size */
+    color: #007bff;
+    margin-bottom: 20px; /* Increased margin */
+}
+
+.user-profile h2 {
+    font-size: 24px; /* Increased font size */
+    color: #333;
+    margin-bottom: 30px; /* Increased margin */
 }

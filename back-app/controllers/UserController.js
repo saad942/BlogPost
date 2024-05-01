@@ -59,8 +59,8 @@ const getUserById = async (req, res) => {
     const userId = req.params.userId; 
 
     try {
-        const products = await User.find({ _id: userId }); 
-        res.json(products);
+        const user = await User.find({  user_id: userId }); 
+        res.json(user);
     } catch (error) {
         console.error('Error fetching user:', error); 
         res.status(500).json({ error: 'Internal server error' }); 
