@@ -16,7 +16,7 @@ function Home() {
     const [image, setImage] = useState(); // Set initial value of image to null
 
     useEffect(() => {
-        axios.get(`http://localhost:3002/user/products/${user._id}`, {
+        axios.get(`http://localhost:3002/user/products/${user.id}`, {
             headers: {
                 'Authorization': ` ${token}` // Fix Authorization header
             }
@@ -55,7 +55,7 @@ function Home() {
                 const formData = new FormData();
                 formData.append('name', name);
                 formData.append('description', description);
-                formData.append('user_id', user._id);
+                formData.append('user_id', user.id);
                 formData.append('image', image);
                 formData.append('category', category);
 
@@ -66,6 +66,8 @@ function Home() {
                 });
                 console.log('Product added:', response.data);
                 setInformation([...information, response.data]);
+                const postInfo=response.data.postInfo;
+                localStorage.setItem('post', JSON.stringify(postInfo)); // Store user info as JSON string
                 setName('');
                 setDescription('');
                 setImage(null);

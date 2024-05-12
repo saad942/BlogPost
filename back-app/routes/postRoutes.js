@@ -69,7 +69,7 @@ router.get('/user/:userId',getUserById);
 
 //
 router.post('/enregister', Enregister);
-router.get('/enr/:userId',getEnrg)
+router.get('/enr/:userId/:postId',getEnrg)
 //
 router.post('/:postId/like', async (req, res) => {
   try {

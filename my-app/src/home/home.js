@@ -5,12 +5,15 @@ import { faBookmark, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Home() {
+    // State variables
     const [information, setInformation] = useState([]);
     const [category, setCategory] = useState('');
     const [likedPosts, setLikedPosts] = useState([]);
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user'));
-    const [save , setSave]=useState([])
+    const [save, setSave] = useState([])
+
+    // Fetch posts from the server
     useEffect(() => {
         const fetchPosts = async () => {
             try {
@@ -28,8 +31,10 @@ function Home() {
         fetchPosts();
     }, [token]);
 
+    // Check if a post is liked
     const isPostLiked = (postId) => likedPosts.includes(postId);
 
+    // Handle like/unlike action
     const handleLike = async (postId) => {
         try {
             const response = await axios.post(`http://localhost:3002/user/${postId}/like`, {}, {
@@ -50,6 +55,7 @@ function Home() {
         }
     };
 
+    // Search for posts based on category
     const search = async () => {
         try {
             const response = await axios.get(`http://localhost:3002/user/products/search?category=${category}`);
@@ -59,35 +65,32 @@ function Home() {
         }
     };
 
+    // Perform search when category changes
     useEffect(() => {
         if (category) {
             search();
         }
     }, [category]);
 
-    const Enregister = async (postId) => {
+    // Save a post
+    const createPost = async ( postId) => {
         try {
-            if (!user) {
-                console.error("User not found");
-                return;
-            }
-    
-            const formData = new FormData();
-            formData.append('post_id', postId);
-            formData.append('user_id', user._id);
-    
-            const response = await axios.post("http://localhost:3002/user/enregister", formData);
-            console.log('Product added:', response.data);
+            const postData = {
+                user_id: user.id , 
+                post_id: postId,   
+            };
             
-            // Update the state with the newly added product
-            setSave(prevSave => [...prevSave, response.data]);
+            const response = await axios.post("http://localhost:3002/user/enregister", postData);
+    
+            console.log('Post created:', response.data);
+    
+            setSave([...save, response.data]);
         } catch (error) {
-            console.error('Error adding product:', error);
+            console.error('Error creating post:', error);
         }
     };
     
-    
-
+    // Render posts
     return (
         <div className="professional-posts-container">
             <div className="custom-select">
@@ -113,7 +116,7 @@ function Home() {
                         <span className={`action${isPostLiked(post._id) ? ' liked' : ''}`} onClick={() => handleLike(post._id)}>
                             <FontAwesomeIcon icon={faThumbsUp} /> Like ({post.likes})
                         </span>
-                        <span className="action" onClick={() => Enregister(post._id)}>
+                        <span className="action" onClick={() => createPost( post._id)}>
                             <FontAwesomeIcon icon={faBookmark} /> Enregister
                         </span>
                     </div>

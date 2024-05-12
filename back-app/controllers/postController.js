@@ -52,7 +52,7 @@ const createProduct = async (req, res) => {
         const image = req.file.filename;
         const product = new Product({ name, description, user_id, image, category });
         await product.save();
-        res.json(product);
+        res.json({product , postInfo: { _id: product._id }});
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

@@ -1,4 +1,5 @@
 const Post = require('../models/EnrModels'); // Assuming you have a Post model
+const Product = require('../models/models');
 
 const Enregister = async (req, res) => {
 
@@ -16,15 +17,16 @@ const Enregister = async (req, res) => {
 
 
 
-const getEnrg =async(req,res)=>{
+const getEnrg = async (req, res) => {
   const userId = req.params.userId; // Extract the user ID from the JWT token
+  const postId = req.params.postId;
   try {
-      const products = await Post.find({  user_id: userId  });
+      const products = await Product.find({ $and: [{ user_id: userId }, { id: postId }] });
       res.json(products);
   } catch (error) {
       console.error('Error fetching posts:', error);
       res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
 
 module.exports = {Enregister , getEnrg };
