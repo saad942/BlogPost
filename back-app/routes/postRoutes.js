@@ -10,6 +10,7 @@ const {
 } = require("../controllers/postController");
 
 const { verifyToken, Login, CreateUser ,getUserById} = require('../controllers/UserController');
+const{Enregister , getEnrg}=require('../controllers/EnrController');
 // const dataUser = require("../dataUser.json");
 
 // // Login route
@@ -56,6 +57,7 @@ const upload = multer({ storage });
 router.get("/products", getProduct);
 router.get("/products/search",  searchForProduct); 
 router.get("/products/:userId", verifyToken, getProductById);
+router.get("/products/:postId", verifyToken, getProductById);
 router.post("/products", verifyToken, upload.single('image'),createProduct);
 router.put("/products/:id", verifyToken, updateProduct);
 router.delete("/products/:id", verifyToken, deleteProduct);
@@ -65,7 +67,9 @@ router.post("/register", CreateUser);
 router.post("/login", Login);
 router.get('/user/:userId',getUserById);
 
-
+//
+router.post('/enregister', Enregister);
+router.get('/enr/:userId',getEnrg)
 //
 router.post('/:postId/like', async (req, res) => {
   try {

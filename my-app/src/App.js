@@ -7,6 +7,7 @@ import Regestry from './login-regestry/regesty';
 import Home from './home/home';
 import Profil from './profil/profil';
 import React, { useEffect } from 'react';
+import Enregister from './Enregister/enregister';
 
 function App() {
   useEffect(() => {
@@ -42,6 +43,7 @@ function App() {
           <Route path="/Controle" element={<Controle />} />
           <Route path="/" element={<Login />} />
           <Route path="/regestry" element={<Regestry />} />
+          <Route path="/enregiter" element={<Enregister />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profil />} />
         </Routes>

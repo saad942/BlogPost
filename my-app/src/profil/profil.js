@@ -38,7 +38,7 @@ function App() {
                         <Link to="/controle">Controle Post</Link>
                     </li>
                     <li>
-                        <Link to="/enregister">Enregister</Link>
+                        <Link to="/enregiter">Enregister</Link>
                     </li>
                 </ul>
                 <span className="logout" onClick={logout}>
@@ -49,8 +49,13 @@ function App() {
                 <h1>Welcome to My Professional Profile Blog</h1>
                 {information.map((user, index) => (
                     <div key={index} className="user-profile">
-                        <h3>Name: {user.name}</h3>
-                        <h2>Email: {user.email}</h2>
+                        <h3>Name: {user.name}</h3><br /><br />
+                        <h2>Email: {user.email}</h2><br /><br />
+                        <div>
+                            <button style={{ backgroundColor: 'rgb(180, 131, 131)', color: 'white', border: 'none', borderRadius: '5px', padding: '8px 12px', margin: '5px', cursor: 'pointer' }}>Modify Account</button>
+                            <button style={{ backgroundColor: 'red', color: 'white', border: 'none', borderRadius: '5px', padding: '8px 12px', margin: '5px', cursor: 'pointer' }}>Delete Account</button>
+
+                        </div>
                     </div>
                 ))}
             </div>
