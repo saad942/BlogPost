@@ -96,7 +96,7 @@ function Home() {
             <div className="custom-select">
                 <label htmlFor="category">Category: </label>
                 <select id="category" value={category} onChange={(e) => { setCategory(e.target.value) }}>
-                    <option value="">Select</option>
+                    <option value="">Select category for post</option>
                     <option value="Économique">Économique</option>
                     <option value="News">News</option>
                     <option value="Sport">Sport</option>
@@ -117,7 +117,7 @@ function Home() {
                             <FontAwesomeIcon icon={faThumbsUp} /> Like ({post.likes})
                         </span>
                         <span className="action" onClick={() => createPost( post._id)}>
-                            <FontAwesomeIcon icon={faBookmark} /> Enregister
+                            <FontAwesomeIcon icon={faBookmark} /> save
                         </span>
                     </div>
                 </div>
