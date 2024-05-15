@@ -18,7 +18,7 @@ function App() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:3002/user/user/${user._id}`);
+                const response = await axios.get(`http://localhost:3002/user/user/${user.id}`);
                 setInformation(response.data);
             } catch (error) {
                 console.error("Error fetching user:", error);

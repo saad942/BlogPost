@@ -1,32 +1,36 @@
 const Post = require('../models/EnrModels'); // Assuming you have a Post model
-const Product = require('../models/models');
 
 const Enregister = async (req, res) => {
-
-
-
   try {
-    const { post_id, user_id } = req.body;
-    const product = new Post({ post_id, user_id });
-    await product.save();
-    res.json(product);
-} catch (err) {
+    const { name, description, user_id, category } = req.body;
+
+    const post = new Post({ name, description, user_id,  category });
+    await post.save();
+
+    res.json({ post });
+  } catch (err) {
     res.status(500).json({ error: err.message });
-}
+  }
 };
+
+
 
 
 
 const getEnrg = async (req, res) => {
-  const userId = req.params.userId; // Extract the user ID from the JWT token
-  const postId = req.params.postId;
+  const userId = req.params.userId;
+
   try {
-      const products = await Product.find({ $and: [{ user_id: userId }, { id: postId }] });
-      res.json(products);
+    const postExists = await Post.find({ user_id: userId});
+
+    
+      res.json(postExists);
+   
   } catch (error) {
-      console.error('Error fetching posts:', error);
-      res.status(500).json({ error: 'Internal server error' });
+    console.error('Error fetching posts:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
-module.exports = {Enregister , getEnrg };
+module.exports = { Enregister, getEnrg };
+

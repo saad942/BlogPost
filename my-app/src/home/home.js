@@ -11,13 +11,13 @@ function Home() {
     const [likedPosts, setLikedPosts] = useState([]);
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user'));
-    const [save, setSave] = useState([])
+    const [savedPosts, setSavedPosts] = useState([]);
 
     // Fetch posts from the server
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get(`http://localhost:3002/user/products`, {
+                const response = await axios.get('http://localhost:3002/user/products', {
                     headers: {
                         'Authorization': token
                     }
@@ -49,7 +49,11 @@ function Home() {
                     return [...prevLikedPosts, postId];
                 }
             });
-            setInformation(prevInformation => prevInformation.map(post => post._id === postId ? { ...post, likes: response.data.likes } : post));
+            setInformation(prevInformation => 
+                prevInformation.map(post => 
+                    post._id === postId ? { ...post, likes: response.data.likes } : post
+                )
+            );
         } catch (error) {
             console.error("Error handling like:", error);
         }
@@ -73,18 +77,18 @@ function Home() {
     }, [category]);
 
     // Save a post
-    const createPost = async ( postId) => {
+    const createPost = async ( name, description,  category ) => {
         try {
             const postData = {
-                user_id: user.id , 
-                post_id: postId,   
+                user_id: user.id,
+                name: name,
+                description: description,
+                category: category
             };
             
             const response = await axios.post("http://localhost:3002/user/enregister", postData);
-    
             console.log('Post created:', response.data);
-    
-            setSave([...save, response.data]);
+            setSavedPosts([...savedPosts, response.data]);
         } catch (error) {
             console.error('Error creating post:', error);
         }
@@ -95,7 +99,7 @@ function Home() {
         <div className="professional-posts-container">
             <div className="custom-select">
                 <label htmlFor="category">Category: </label>
-                <select id="category" value={category} onChange={(e) => { setCategory(e.target.value) }}>
+                <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option value="">Select category for post</option>
                     <option value="Économique">Économique</option>
                     <option value="News">News</option>
@@ -116,8 +120,8 @@ function Home() {
                         <span className={`action${isPostLiked(post._id) ? ' liked' : ''}`} onClick={() => handleLike(post._id)}>
                             <FontAwesomeIcon icon={faThumbsUp} /> Like ({post.likes})
                         </span>
-                        <span className="action" onClick={() => createPost( post._id)}>
-                            <FontAwesomeIcon icon={faBookmark} /> save
+                        <span className="action" onClick={() => createPost( post.name, post.description,  post.category)}>
+                            <FontAwesomeIcon icon={faBookmark} /> Save
                         </span>
                     </div>
                 </div>
