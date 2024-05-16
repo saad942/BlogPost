@@ -6,12 +6,17 @@ const RegisteredPosts = () => {
   const [posts, setPosts] = useState([]);
   // const post = JSON.parse(localStorage.getItem('post'));
   const user = JSON.parse(localStorage.getItem('user'));
+  const token = localStorage.getItem('token');
+
 
   useEffect(() => {
     const fetchPosts = async () => {
       if (user ) {
         try {
-          const response = await axios.get(`http://localhost:3002/user/enr/${user.id}`);
+          const response = await axios.get(`http://localhost:3002/user/enr/${user.id}`,{
+             headers: {
+            'Authorization': ` ${token}` // Fix Authorization header
+        }});
           setPosts(response.data);
         } catch (error) {
           console.error('Error fetching registered posts:', error);

@@ -18,11 +18,12 @@ export default function Nav() {
                 {!token ? (
                     <>
                        <span onClick={() => navigate('/home')}> Post</span>
-                        <span onClick={() => navigate('/')}>Controle my post</span>
-                        <span> <FontAwesomeIcon icon={faSignInAlt} onClick={() => navigate('/')} style={{ cursor: 'pointer' }} /></span>
+                        <span onClick={() => navigate('/')}>About-us</span>
+                        <span> <FontAwesomeIcon icon={faSignInAlt} onClick={() => navigate('/login')} style={{ cursor: 'pointer' }} /></span>
                     </>
                 ) : (
                     <>
+                    
                         {/* <span onClick={() => navigate('/Controle')}>Controle my post</span> */}
                         <input type="text" placeholder="Search posts..." className="search-input" />
                         <FontAwesomeIcon icon={faSearch} className="search-icon" />

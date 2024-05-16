@@ -54,8 +54,8 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage });
-router.get("/products", getProduct);
-router.get("/products/search",  searchForProduct); 
+router.get("/products", verifyToken , getProduct);
+router.get("/products/search", verifyToken ,  searchForProduct); 
 router.get("/products/:userId", verifyToken, getProductById);
 router.get("/products/:postId", verifyToken, getProductById);
 router.post("/products", verifyToken, upload.single('image'),createProduct);
@@ -65,11 +65,11 @@ router.delete("/products/:id", verifyToken, deleteProduct);
 // User Routes
 router.post("/register", CreateUser);
 router.post("/login", Login);
-router.get('/user/:userId',getUserById);
+router.get('/user/:userId', verifyToken ,getUserById);
 
 //
-router.post('/enregister', Enregister);
-router.get('/enr/:userId',getEnrg);
+router.post('/enregister',Enregister);
+router.get('/enr/:userId', verifyToken ,getEnrg);
 
 //
 router.post('/:postId/like', async (req, res) => {

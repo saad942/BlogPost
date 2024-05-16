@@ -10,15 +10,21 @@ function App() {
     const [information, setInformation] = useState([])
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user'));
+    const token = localStorage.getItem('token');
+
     const logout = () => {
         localStorage.removeItem('token'); // For example, if you store user data in localStorage
+        localStorage.removeItem('post');
+        localStorage.removeItem('user');
         navigate('/');
     };
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(`http://localhost:3002/user/user/${user.id}`);
+                const response = await axios.get(`http://localhost:3002/user/user/${user.id}`,{ headers: {
+                    'Authorization': ` ${token}` // Fix Authorization header
+                }});
                 setInformation(response.data);
             } catch (error) {
                 console.error("Error fetching user:", error);

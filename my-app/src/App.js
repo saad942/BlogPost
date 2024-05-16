@@ -8,7 +8,7 @@ import Home from './home/home';
 import Profil from './profil/profil';
 import React, { useEffect } from 'react';
 import Enregister from './Enregister/enregister';
-
+import Front from './Front/front';
 function App() {
   useEffect(() => {
     // Load Botpress Web Chat Scripts
@@ -36,20 +36,22 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <Router>
-        <Nav />
-        
-        <Routes>
-          <Route path="/Controle" element={<Controle />} />
-          <Route path="/" element={<Login />} />
-          <Route path="/regestry" element={<Regestry />} />
-          <Route path="/enregiter" element={<Enregister />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<Profil />} />
-        </Routes>
-        <Footer />
-      </Router>
-    </div>
+    <Router>
+      <Nav />
+      <Routes>
+      <Route path="/"element={<><Front /><Footer /> </>}/>
+
+        <Route path="/login"element={<><Login /><Footer /> </>}/>
+        <Route path="/regestry" element={<>  <Regestry />  <Footer /></>}/>
+
+        {/* Routes without Footer */}
+        <Route path="/Controle" element={<Controle />} />
+        <Route path="/enregiter" element={<Enregister />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/profile" element={<Profil />} />
+      </Routes>
+    </Router>
+  </div>
   );
 }
 
