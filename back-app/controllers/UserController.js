@@ -23,6 +23,22 @@ const Login = async (req, res) => {
     }
 };
 
+const deleteUser =async(req,res)=>{
+    const id =req.params.id
+   try{
+    const user =await User.findOneAndDelete({user_id:id})
+    if (user) {
+        res.send('Product deleted successfully');
+    } else {
+        res.status(404).send('Product not found');
+    }
+   }catch(error){
+    console.error('Error deleting product:', error);
+    res.status(500).send('Error deleting product');
+
+   }
+}
+
 const verifyToken = (req, res, next) => {
     const token = req.headers['authorization'];
     if (!token) return res.sendStatus(401); // Unauthorized
@@ -68,4 +84,4 @@ const getUserById = async (req, res) => {
 };
 
 
-module.exports = { Login, verifyToken, CreateUser ,getUserById};
+module.exports = { Login, verifyToken, CreateUser ,getUserById ,deleteUser};

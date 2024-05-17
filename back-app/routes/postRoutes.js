@@ -9,7 +9,7 @@ const {
   getProduct 
 } = require("../controllers/postController");
 
-const { verifyToken, Login, CreateUser ,getUserById} = require('../controllers/UserController');
+const { verifyToken, Login, CreateUser ,getUserById ,deleteUser} = require('../controllers/UserController');
 const{Enregister , getEnrg}=require('../controllers/EnrController');
 // const dataUser = require("../dataUser.json");
 
@@ -70,6 +70,8 @@ router.get('/user/:userId', verifyToken ,getUserById);
 //
 router.post('/enregister',Enregister);
 router.get('/enr/:userId', verifyToken ,getEnrg);
+router.delete('/user/:id', verifyToken , deleteUser);
+
 
 //
 router.post('/:postId/like', async (req, res) => {

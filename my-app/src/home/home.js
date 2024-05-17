@@ -62,7 +62,11 @@ function Home() {
     // Search for posts based on category
     const search = async () => {
         try {
-            const response = await axios.get(`http://localhost:3002/user/products/search?category=${category}`);
+            const response = await axios.get(`http://localhost:3002/user/products/search?category=${category}`,{
+                headers: {
+                    'Authorization': token
+                }
+            });
             setInformation(response.data);
         } catch (error) {
             console.error("Error searching posts:", error);

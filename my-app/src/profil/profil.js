@@ -32,7 +32,24 @@ function App() {
         };
         fetchUser();
     }, []);
-
+    const deleteUser = async (id) => {
+        try {
+            const response = await axios.delete(`http://localhost:3002/user/user/${id}`, {
+                headers: {
+                    'Authorization': ` ${token}`
+                }
+            })
+            console.log(response);
+            console.log('user deleted successfully');
+            localStorage.removeItem('token'); // For example, if you store user data in localStorage
+        localStorage.removeItem('post');
+        localStorage.removeItem('user');
+        navigate('/');
+            setInformation(information.filter(item => item.id !== id));
+        } catch (error) {
+            console.error('An error occurred:', error.message);
+        }
+    };
     return (
         <div className="containerr">
             <div className="sidebar">
@@ -59,7 +76,7 @@ function App() {
                         <h2>Email: {user.email}</h2><br /><br />
                         <div>
                             <button style={{ backgroundColor: 'rgb(180, 131, 131)', color: 'white', border: 'none', borderRadius: '5px', padding: '8px 12px', margin: '5px', cursor: 'pointer' }}>Modify Account</button>
-                            <button style={{ backgroundColor: 'red', color: 'white', border: 'none', borderRadius: '5px', padding: '8px 12px', margin: '5px', cursor: 'pointer' }}>Delete Account</button>
+                            <button onClick={()=>deleteUser(user.user_id)} style={{ backgroundColor: 'red', color: 'white', border: 'none', borderRadius: '5px', padding: '8px 12px', margin: '5px', cursor: 'pointer' }}>Delete Account</button>
 
                         </div>
                     </div>
