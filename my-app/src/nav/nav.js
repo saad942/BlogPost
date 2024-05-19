@@ -17,8 +17,7 @@ export default function Nav() {
 
                 {!token ? (
                     <>
-                       <span onClick={() => navigate('/home')}> Post</span>
-                        <span onClick={() => navigate('/')}>About-us</span>
+                        <span onClick={() => navigate('/')}>Home</span>
                         <span> <FontAwesomeIcon icon={faSignInAlt} onClick={() => navigate('/login')} style={{ cursor: 'pointer' }} /></span>
                     </>
                 ) : (
