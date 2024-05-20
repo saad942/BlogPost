@@ -10,30 +10,6 @@ import React, { useEffect } from 'react';
 import Enregister from './Enregister/enregister';
 import Front from './Front/front';
 function App() {
-  useEffect(() => {
-    // Load Botpress Web Chat Scripts
-    const loadBotpressScripts = () => {
-      const script1 = document.createElement('script');
-      script1.src = 'https://cdn.botpress.cloud/webchat/v1/inject.js';
-      document.body.appendChild(script1);
-
-      const script2 = document.createElement('script');
-      script2.src = 'https://mediafiles.botpress.cloud/7fd9885a-7ebe-4895-966d-04b29094fd67/webchat/config.js';
-      script2.defer = true;
-      document.body.appendChild(script2);
-
-      return () => {
-        document.body.removeChild(script1);
-        document.body.removeChild(script2);
-      };
-    };
-
-    const cleanup = loadBotpressScripts();
-
-    return () => {
-      cleanup();
-    };
-  }, []);
   return (
     <div className="App">
     <Router>
@@ -41,8 +17,8 @@ function App() {
       <Routes>
       <Route path="/"element={<><Front /><Footer /> </>}/>
 
-        <Route path="/login"element={<><Login /><Footer /> </>}/>
-        <Route path="/regestry" element={<>  <Regestry />  <Footer /></>}/>
+        <Route path="/login"element={<><Login /> </>}/>
+        <Route path="/regestry" element={<>  <Regestry /> </>}/>
 
         {/* Routes without Footer */}
         <Route path="/Controle" element={<Controle />} />

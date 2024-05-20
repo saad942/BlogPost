@@ -15,7 +15,7 @@ const RegisteredPosts = () => {
         try {
           const response = await axios.get(`http://localhost:3002/user/enr/${user.id}`,{
              headers: {
-            'Authorization': ` ${token}` // Fix Authorization header
+            'Authorization': ` ${token}` 
         }});
           setPosts(response.data);
         } catch (error) {
