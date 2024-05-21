@@ -1,4 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faTimesCircle   ,faMobileAlt  } from '@fortawesome/free-solid-svg-icons';
 import './front.css'
+
 export default function Front(){
     return(<div>
        <div className="blog">
@@ -14,11 +17,31 @@ export default function Front(){
         </div>
        </div><br/><br/><br/><br/><br/><br/>
        <div className='cont'>
-        <div>
-            
+        <div className="cmt">
+        <FontAwesomeIcon icon={faCheck} className="icon" />
+        <h3>Compatible avec d'autres outils</h3>
+        <p>Marsoul fonctionne parfaitement bien avec des clients ,
+             y compris pour la synchronisation des contacts et des événements.</p>
+        
+
+        </div>
+        <div className="cmt">
+        <FontAwesomeIcon icon={faTimesCircle} className="icon" />
+        <h3>Soyez productif, même hors connexion</h3>
+        <p>Avec Marsoul hors connexion, lisez ou supprimez vos messages Marsoul, répondez-y ou
+             effectuez des recherches dedans sans être connecté à Internet.</p>
+
+        </div>
+        <div className="cmt">
+        <FontAwesomeIcon icon={   faMobileAlt} className="icon"/>
+        <h3>Utilisez Marsoul sur n'importe quel appareil</h3>
+        <p>Profitez de la simplicité de Marsoul, où que vous soyez.</p>
+
         </div>
 
        </div>
+
+       <div>c</div>
         
     </div>)
 }

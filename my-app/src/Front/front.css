@@ -30,3 +30,25 @@
     margin-top: 30px;
     margin-right: 50px;
 }
+.cont{
+    background-color: rgb(247, 241, 241);
+    font-size: 15px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+}
+.cont p{
+    color: rgb(128, 113, 113);
+}
+.icon{
+    font-size: 30px;
+    color: rgb(90, 90, 238);
+}
+.cmt{
+    margin-top: 90px;
+
+    width: 400px;
+    height: 300px;
+    margin-left: 70px;
+}
