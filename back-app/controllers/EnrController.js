@@ -14,7 +14,20 @@ const Enregister = async (req, res) => {
 };
 
 
-
+const deletePost = async (req, res) => {
+  try {
+      const id = req.params.id;
+      const deletedProduct = await Post.findOneAndDelete({ _id: id });
+      if (deletedProduct) {
+          res.send('Product deleted successfully');
+      } else {
+          res.status(404).send('Product not found');
+      }
+  } catch (error) {
+      console.error('Error deleting product:', error);
+      res.status(500).send('Error deleting product');
+  }
+};
 
 
 const getEnrg = async (req, res) => {
@@ -32,5 +45,5 @@ const getEnrg = async (req, res) => {
   }
 };
 
-module.exports = { Enregister, getEnrg };
+module.exports = { Enregister, getEnrg,deletePost };
 

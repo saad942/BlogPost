@@ -1,6 +1,6 @@
 import React from "react";
 import "./nav.css"
-import { faSignInAlt, faUserCircle, faSearch , faMessage } from "@fortawesome/free-solid-svg-icons";
+import { faSignInAlt, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ export default function Nav() {
 
         <div className="navbar">
 
-            <strong  onClick={() => navigate('/home')} style={{ marginLeft: '10px' , fontSize:'25px' ,marginTop:'-5px'}}>marsoul </strong>
+            <strong  onClick={() => navigate('/home')} style={{ marginLeft: '10px' , fontSize:'25px' ,marginTop:'-5px',    fontWeight:'lighter'}}>Marsoul </strong>
             <div></div>
             <div className="nav">
 
@@ -23,10 +23,7 @@ export default function Nav() {
                 ) : (
                     <>
                     
-                        {/* <span onClick={() => navigate('/Controle')}>Controle my post</span> */}
-                        <input type="text" placeholder="Search ..." className="search-input" />
-                        <FontAwesomeIcon icon={faSearch} className="search-icon" />
-                        <span> <FontAwesomeIcon icon={faMessage} onClick={() => navigate('/profile')} style={{ marginLeft:'40PX',   fontSize: '20px'}} /></span>
+                    
 
                         <span> <FontAwesomeIcon icon={faUserCircle} onClick={() => navigate('/profile')} style={{ marginLeft:'40PX',   fontSize: '25px'}} /></span>
                     </>

@@ -13,7 +13,7 @@
 .text p{
  color: rgb(80, 76, 76);
 }
-.text button{
+.btn{
     background-color: #4b504b; 
     border: none; 
     color: white;
@@ -25,10 +25,10 @@
 
 }
 .img{
-    width: 600px;
-    height: 600px;
-    margin-top: 30px;
-    margin-right: 50px;
+    width: 500px;
+    height: 400px;
+    margin-top: 45px;
+    margin-right: 150px;
 }
 .cont{
     background-color: rgb(247, 241, 241);
@@ -52,3 +52,34 @@
     height: 300px;
     margin-left: 70px;
 }
+
+  
+  .container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    margin-top: 50px;
+  }
+  
+  .dachbord {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #666;
+  }
+  

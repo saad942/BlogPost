@@ -10,7 +10,7 @@ const {
 } = require("../controllers/postController");
 
 const { verifyToken, Login, CreateUser ,getUserById ,deleteUser} = require('../controllers/UserController');
-const{Enregister , getEnrg}=require('../controllers/EnrController');
+const{Enregister , getEnrg, deletePost}=require('../controllers/EnrController');
 // const dataUser = require("../dataUser.json");
 
 // // Login route
@@ -70,6 +70,8 @@ router.get('/user/:userId', verifyToken ,getUserById);
 //
 router.post('/enregister',Enregister);
 router.get('/enr/:userId', verifyToken ,getEnrg);
+router.delete("/enr/:id", verifyToken, deletePost);
+
 router.delete('/user/:id', verifyToken , deleteUser);
 
 

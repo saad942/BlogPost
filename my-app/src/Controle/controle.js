@@ -109,7 +109,7 @@ function Home() {
 
     return (
         <div className="home-container">
-            <img src="./images/pexels-photo-3631711.jpeg" className="img" alt="Example" />
+            <img src="./images/pexels-photo-3631711.jpeg" className="imgg" alt="Example" />
             <div className="form-container">
             <select onChange={(e) => setCategory(e.target.value)} value={category}>
                 <option>category</option>

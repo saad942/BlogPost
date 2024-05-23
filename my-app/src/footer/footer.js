@@ -1,91 +1,68 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faFacebook, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { useSpring, animated } from "react-spring";
 
 const Footer = () => {
+  const logoAnimation = useSpring({
+    loop: true,
+    to: [{ rotateZ: 0 }, { rotateZ: 45 }],
+    from: { rotateZ: 0 },
+    config: { duration: 2000 },
+  });
+
   return (
     <footer style={footerStyle}>
       <div style={logoContainer}>
-        <strong style={logo}>Blog</strong>
-      </div>
-      <div style={linksContainer}>
-        <div style={linkColumn}>
-          <h4 style={linkHeader}>Company</h4>
-          <a href="/about" style={linkStyle}>About Us</a>
-          <a href="/about" style={linkStyle}>Contact Us</a>
+        <animated.strong style={{ ...logo, ...logoAnimation }}>Marsoul</animated.strong>
+        <div style={connectContainer}>
+          <div>
+            Marsoul Hel:<a href="mailto:info@example.com" style={iconLink}>
+              <FontAwesomeIcon icon={faEnvelope} size="lg" />
+            </a><br/>
+          </div>
         </div>
-        <div style={linkColumn}>
-          <h4 style={linkHeader}>Services</h4>
-          <a href="/product" style={linkStyle}>blog</a>
-          <a href="/login" style={linkStyle}>join</a>
-        </div>
-        <div style={linkColumn}>
-          <h4 style={linkHeader}>Connect</h4>
-          <a href="https://www.facebook.com" style={iconLink}><FontAwesomeIcon icon={faFacebook} size="lg" /></a>
-          <a href="https://www.instagram.com" style={iconLink}><FontAwesomeIcon icon={faInstagram} size="lg" /></a>
-          <a href="https://www.linkedin.com" style={iconLink}><FontAwesomeIcon icon={faLinkedin} size="lg" /></a>
-          <a href="mailto:info@example.com" style={iconLink}><FontAwesomeIcon icon={faEnvelope} size="lg" /></a>
-        </div>
-      </div>
-      <div style={bottomBar}>
-        <p style={copyright}>Website made by Saad</p>
       </div>
     </footer>
   );
 }
 
 const footerStyle = {
-  backgroundColor: '#39464e', // Adjust the color here to match your site
-  color: '#fff',
-  padding: '50px 20px',
-  textAlign: 'center',
+  backgroundColor: '#4b504b', // A darker shade for a more professional look
+  color: '#ffffff',
+  display: 'flex',
+  flexWrap: 'wrap',
+  padding: '20px', // Added padding for some spacing around the content
 };
 
 const logoContainer = {
-  marginBottom: '30px',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center', // Center items vertically for a balanced look
+  width: '100%', // Ensure it takes the full width of the parent container
+  marginBottom: '20px',
 };
 
 const logo = {
-  fontSize: '36px',
+  fontSize: '32px',
+  fontWeight: 'lighter',
+  marginLeft:'20px'
 };
 
-const linksContainer = {
+const connectContainer = {
   display: 'flex',
-  justifyContent: 'space-between',
-};
-
-const linkColumn = {
-  flex: '1',
-  margin: '0 20px',
-};
-
-const linkHeader = {
-  fontSize: '20px',
-  marginBottom: '10px',
-};
-
-const linkStyle = {
-  color: '#fff',
-  textDecoration: 'none',
-  display: 'block',
-  marginBottom: '8px',
-  fontSize: '16px',
+  alignItems: 'center',
 };
 
 const iconLink = {
-  color: '#fff',
-  margin: '0 10px',
+  color: '#ffffff',
+  margin: '0 15px',
   textDecoration: 'none',
+  transition: 'color 0.3s',
 };
 
-const bottomBar = {
-  padding: '10px 0',
-  marginTop: '50px',
-};
-
-const copyright = {
-  margin: '0',
+iconLink[':hover'] = {
+  color: '#ffc107', // Change color on hover for better UX
 };
 
 export default Footer;

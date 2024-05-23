@@ -12,6 +12,8 @@ function Home() {
     const token = localStorage.getItem('token');
     const user = JSON.parse(localStorage.getItem('user'));
     const [savedPosts, setSavedPosts] = useState([]);
+    const [isClicked, setIsClicked] = useState(false); 
+
 
     // Fetch posts from the server
     useEffect(() => {
@@ -93,8 +95,11 @@ function Home() {
             const response = await axios.post("http://localhost:3002/user/enregister", postData);
             console.log('Post created:', response.data);
             setSavedPosts([...savedPosts, response.data]);
+            setIsClicked(true); 
+
         } catch (error) {
             console.error('Error creating post:', error);
+            setIsClicked(false);
         }
     };
     
@@ -124,7 +129,7 @@ function Home() {
                         <span className={`action${isPostLiked(post._id) ? ' liked' : ''}`} onClick={() => handleLike(post._id)}>
                             <FontAwesomeIcon icon={faThumbsUp} /> Like ({post.likes})
                         </span>
-                        <span className="action" onClick={() => createPost( post.name, post.description,  post.category)}>
+                        <span className="action" style={{    color: isClicked? 'blue' : '#aaa',  }} onClick={() => createPost( post.name, post.description,  post.category)}>
                             <FontAwesomeIcon icon={faBookmark} /> Save
                         </span>
                     </div>
