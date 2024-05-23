@@ -75,7 +75,6 @@ function App() {
                         <h3>Name: {user.name}</h3><br /><br />
                         <h2>Email: {user.email}</h2><br /><br />
                         <div>
-                            <button style={{ backgroundColor: 'rgb(180, 131, 131)', color: 'white', border: 'none', borderRadius: '5px', padding: '8px 12px', margin: '5px', cursor: 'pointer' }}>Modify Account</button>
                             <button onClick={()=>deleteUser(user.user_id)} style={{ backgroundColor: 'red', color: 'white', border: 'none', borderRadius: '5px', padding: '8px 12px', margin: '5px', cursor: 'pointer' }}>Delete Account</button>
 
                         </div>

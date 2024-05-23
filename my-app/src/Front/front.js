@@ -49,8 +49,8 @@ export default function Front(){
         <img src="./images/React App - Google Chrome 22_05_2024 16_25_55.png" alt="Dachbord" className="dachbord"/>
     </div>
     <div>
-        <h3>Depuis toujours, Marsoul repose sur une stratégie de sécurité renforcée.</h3>
-        <p>Nous mettons tout en œuvre pour vous protéger contre le spam, l'hameçonnage et les logiciels malveillants, avant même qu'ils n'atteignent votre boîte de réception. Nos fonctionnalités de filtrage du spam optimisées par l'IA bloquent près de 10 millions d'e-mails indésirables par minute.</p>
+        <h3 className="h3">Depuis toujours, Marsoul repose sur une stratégie de sécurité renforcée.</h3>
+        <p className="p">Nous mettons tout en œuvre pour vous protéger contre le spam, l'hameçonnage et les logiciels malveillants, avant même qu'ils n'atteignent votre boîte de réception. Nos fonctionnalités de filtrage du spam optimisées par l'IA bloquent près de 10 millions d'e-mails indésirables par minute.</p>
     </div>
 </div>
 
